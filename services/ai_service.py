@@ -40,7 +40,7 @@ class AIService:
         Supports official 'google-genai' SDK with fallback to 'google-generativeai'.
         """
         if not self.api_key:
-            raise AIServiceException("API Key missing. Please set GEMINI_API_KEY in your environment or .env file.")
+            raise AIServiceException("AI Service Unavailable. Please check system configuration.")
 
         # Primary attempt: Official Google GenAI SDK (`google-genai`)
         try:
@@ -121,11 +121,11 @@ class AIService:
         except Exception as e:
             err_str = str(e)
             if "API_KEY_INVALID" in err_str or "API key not valid" in err_str:
-                raise AIServiceException("Invalid Gemini API Key provided. Please verify your GEMINI_API_KEY in '.env'.")
+                raise AIServiceException("AI Service Unavailable. Authentication failed.")
             elif "QUOTA_EXCEEDED" in err_str or "429" in err_str:
-                raise AIServiceException("Gemini API rate limit or quota exceeded. Please wait a moment and try again.")
+                raise AIServiceException("AI Service rate limit or quota exceeded. Please try again shortly.")
             else:
-                raise AIServiceException(f"AI Service Error: {err_str}")
+                raise AIServiceException("AI Service Error occurred. Please try again.")
 
     # Mode-specific Service Methods
     def summarize(self, text: str, summary_style: str = "Bullet Points") -> str:

@@ -29,10 +29,10 @@ def validate_api_key() -> Tuple[bool, str]:
     """
     api_key = get_api_key()
     if not api_key:
-        return False, "GEMINI_API_KEY is missing. Please set it in your '.env' file or environment."
+        return False, "AI Service Unavailable"
     if api_key == "your_gemini_api_key_here":
-        return False, "GEMINI_API_KEY contains placeholder text. Replace it with your actual Gemini API key in '.env'."
-    return True, "API Key configured successfully."
+        return False, "AI Service Unavailable"
+    return True, "AI Connected"
 
 
 def count_words(text: str) -> int:

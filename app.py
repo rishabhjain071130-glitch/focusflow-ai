@@ -109,19 +109,18 @@ with st.sidebar:
 
     st.divider()
 
-    # API Key Configuration Status
-    is_api_valid, api_status_msg = validate_api_key()
+    # AI Service Connection Status
+    is_api_valid, _ = validate_api_key()
     if is_api_valid:
         st.markdown(
-            '<div class="status-badge-ok">🟢 API Key: Active</div>',
+            '<div class="status-badge-ok">🟢 AI Connected</div>',
             unsafe_allow_html=True,
         )
     else:
         st.markdown(
-            '<div class="status-badge-err">🔴 API Key: Action Required</div>',
+            '<div class="status-badge-err">🔴 AI Service Unavailable</div>',
             unsafe_allow_html=True,
         )
-        st.warning(api_status_msg)
 
     st.divider()
 
@@ -139,9 +138,6 @@ with st.sidebar:
         index=0,
         help="Select an AI capability to optimize your workflow.",
     )
-
-    st.divider()
-    st.info("💡 **Tip**: Configure your `GEMINI_API_KEY` in the `.env` file to enable live AI responses.")
 
 
 # -----------------------------------------------------------------------------
