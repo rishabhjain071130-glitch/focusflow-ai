@@ -83,25 +83,14 @@ class AIService:
             if sdk_type == "genai":
                 from google.genai import types
                 
-                # Attempt with gemini-2.5-flash, fallback to gemini-1.5-flash if needed
-                try:
-                    response = client.models.generate_content(
-                        model=self.default_model,
-                        contents=prompt,
-                        config=types.GenerateContentConfig(
-                            system_instruction=system_instruction,
-                            temperature=0.7,
-                        ),
-                    )
-                except Exception:
-                    response = client.models.generate_content(
-                        model="gemini-1.5-flash",
-                        contents=prompt,
-                        config=types.GenerateContentConfig(
-                            system_instruction=system_instruction,
-                            temperature=0.7,
-                        ),
-                    )
+                response = client.models.generate_content(
+                    model=self.default_model,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        system_instruction=system_instruction,
+                        temperature=0.7,
+                    ),
+                )
                 return response.text if response.text else "No content returned from Gemini API."
 
             elif sdk_type == "legacy":
@@ -122,7 +111,7 @@ class AIService:
             err_str = str(e)
             if "API_KEY_INVALID" in err_str or "API key not valid" in err_str:
                 raise AIServiceException("AI Service Unavailable. Authentication failed.")
-            elif "QUOTA_EXCEEDED" in err_str or "429" in err_str:
+            elif "RESOURCE_EXHAUSTED" in err_str or "QUOTA_EXCEEDED" in err_str or "429" in err_str:
                 raise AIServiceException("AI Service rate limit or quota exceeded. Please try again shortly.")
             else:
                 raise AIServiceException("AI Service Error occurred. Please try again.")
@@ -139,11 +128,18 @@ class AIService:
         return self.generate_response(prompt)
 
     def generate_content(
-        self, instructions: str, content_type: str = "Email", tone: str = "Professional"
+        self,
+        instructions: str,
+        content_type: str = "Email",
+        tone: str = "Professional",
+        length: str = "Medium",
     ) -> str:
-        """Generate content based on instructions and parameters."""
+        """Generate content based on instructions, content type, tone, and length."""
         prompt = build_generate_content_prompt(
-            instructions=instructions, content_type=content_type, tone=tone
+            instructions=instructions,
+            content_type=content_type,
+            tone=tone,
+            length=length,
         )
         return self.generate_response(prompt)
 

@@ -109,7 +109,7 @@ with st.sidebar:
 
     st.divider()
 
-    # AI Service Connection Status
+    # AI Connection Status
     is_api_valid, _ = validate_api_key()
     if is_api_valid:
         st.markdown(
@@ -157,13 +157,13 @@ ai_service = AIService()
 # -----------------------------------------------------------------------------
 if selected_mode == MODE_SUMMARIZE:
     st.header("📝 Text Summarization")
-    st.write("Extract core ideas, key bullet points, or executive summaries from lengthy documents.")
+    st.write("Extract bullet points, concise paragraphs, or executive summaries from lengthy documents.")
 
     col1, col2 = st.columns([3, 1])
     with col2:
         summary_style = st.selectbox(
             "Summary Style",
-            options=["Bullet Points", "Executive Summary", "Key Takeaways", "Short Paragraph"],
+            options=["Bullet Points", "Concise Summary", "Executive Summary"],
             index=0,
         )
 
@@ -196,11 +196,11 @@ if selected_mode == MODE_SUMMARIZE:
 # -----------------------------------------------------------------------------
 elif selected_mode == MODE_ASK_AI:
     st.header("❓ Question Answering")
-    st.write("Ask questions directly or provide context text for precise answers.")
+    st.write("Ask general questions directly or provide reference context for grounded answers.")
 
     question_input = st.text_input(
         "Your Question:",
-        placeholder="What are the key differences between synchronous and asynchronous execution?",
+        placeholder="e.g., What are the key principles of responsive design?",
     )
 
     with st.expander("📌 Optional Reference Context (Paste document/code here)", expanded=False):
@@ -234,13 +234,19 @@ elif selected_mode == MODE_ASK_AI:
 # -----------------------------------------------------------------------------
 elif selected_mode == MODE_GENERATE_CONTENT:
     st.header("✍️ Content Generation")
-    st.write("Draft professional emails, blog posts, outlines, study guides, and reports.")
+    st.write("Draft emails, study notes, blog outlines, social media posts, and descriptions.")
 
-    col1, col2 = st.columns([1, 1])
+    col1, col2, col3 = st.columns([1, 1, 1])
     with col1:
         content_type = st.selectbox(
             "Content Type",
-            options=["Email", "Blog Post", "Executive Brief", "Study Guide", "Task Outline"],
+            options=[
+                "Email",
+                "Study Notes",
+                "Blog Outline",
+                "Social Media Post",
+                "Professional Description",
+            ],
             index=0,
         )
     with col2:
@@ -249,11 +255,17 @@ elif selected_mode == MODE_GENERATE_CONTENT:
             options=["Professional", "Casual", "Academic", "Concise", "Persuasive"],
             index=0,
         )
+    with col3:
+        length = st.selectbox(
+            "Target Length",
+            options=["Short", "Medium", "Detailed"],
+            index=1,
+        )
 
     instructions_input = st.text_area(
         "Topic / Instructions:",
         height=200,
-        placeholder="e.g., Write a project launch announcement email to stakeholders highlighting key features and launch date...",
+        placeholder="e.g., Write a project update email to team leads summarizing milestones achieved and upcoming deadlines...",
     )
 
     if st.button("🎨 Generate Content", type="primary", use_container_width=True):
@@ -266,6 +278,7 @@ elif selected_mode == MODE_GENERATE_CONTENT:
                         instructions=instructions_input,
                         content_type=content_type,
                         tone=tone,
+                        length=length,
                     )
                     st.success("Draft Generated!")
                     st.markdown("### Generated Content")
@@ -278,7 +291,7 @@ elif selected_mode == MODE_GENERATE_CONTENT:
 # -----------------------------------------------------------------------------
 elif selected_mode == MODE_ANALYZE_TEXT:
     st.header("🔍 Text & Document Analysis")
-    st.write("Analyze text structure, tone, readability, sentiment, or key entities.")
+    st.write("Receive structured critique including main topic, key points, observations, strengths, improvements, and assessment.")
 
     col1, col2 = st.columns([3, 1])
     with col2:
@@ -297,7 +310,7 @@ elif selected_mode == MODE_ANALYZE_TEXT:
         text_to_analyze = st.text_area(
             "Text to Analyze:",
             height=250,
-            placeholder="Paste your draft, communication, or document to analyze...",
+            placeholder="Paste your draft, proposal, or document snippet to analyze...",
         )
         st.markdown(
             f'<div class="metric-badge">Words: {count_words(text_to_analyze)}</div>',
@@ -314,7 +327,7 @@ elif selected_mode == MODE_ANALYZE_TEXT:
                         text=text_to_analyze, analysis_type=analysis_type
                     )
                     st.success("Analysis Complete!")
-                    st.markdown("### Insights & Breakdown")
+                    st.markdown("### Structured Document Analysis")
                     st.markdown(result)
                 except AIServiceException as e:
                     st.error(f"Error: {e}")
@@ -324,7 +337,7 @@ elif selected_mode == MODE_ANALYZE_TEXT:
 # -----------------------------------------------------------------------------
 elif selected_mode == MODE_SMART_SUGGESTIONS:
     st.header("💡 Smart Productivity Suggestions")
-    st.write("Get actionable next steps, work breakdown structures, or follow-up recommendations.")
+    st.write("Get actionable next steps, work breakdown structures, or priority recommendations.")
 
     col1, col2 = st.columns([3, 1])
     with col2:
@@ -341,9 +354,9 @@ elif selected_mode == MODE_SMART_SUGGESTIONS:
 
     with col1:
         suggestion_input = st.text_area(
-            "Project Context / Meeting Notes / Goals:",
+            "Project Context / Meeting Notes / Goal Statement:",
             height=250,
-            placeholder="Paste raw notes, project brief, or email thread to turn into structured next steps...",
+            placeholder="Paste raw meeting notes, project brief, or goal statement to generate structured next steps...",
         )
         st.markdown(
             f'<div class="metric-badge">Words: {count_words(suggestion_input)}</div>',

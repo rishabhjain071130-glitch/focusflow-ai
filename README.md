@@ -16,11 +16,11 @@ In today's information-heavy environment, users waste significant time manually 
 
 ## ✨ Core Capabilities (Week 1)
 
-1. **📝 Text Summarization**: Generate high-impact bullet points, executive summaries, key takeaways, or short paragraphs from long texts.
-2. **❓ Question Answering (Ask AI)**: Get accurate, direct answers to questions with optional context grounding.
-3. **✍️ Content Generation**: Draft emails, blog posts, executive briefs, study guides, or outlines with customizable tone and parameters.
-4. **🔍 Text & Document Analysis**: Critique text readability, tone, sentiment, structure, and key entities.
-5. **💡 Intelligent Suggestions**: Turn unstructured text into prioritized next steps, work breakdown structures, or strategic recommendations.
+1. **📝 Text Summarization**: Generate high-impact `Bullet Points`, a single tight `Concise Summary`, or a multi-paragraph `Executive Summary`.
+2. **❓ Question Answering (Ask AI)**: Get accurate, direct answers to general questions or ground answers using optional reference context. States limitations clearly when information is missing.
+3. **✍️ Content Generation**: Draft `Email`, `Study Notes`, `Blog Outline`, `Social Media Post`, or `Professional Description` with customizable Tone (`Professional`, `Casual`, `Academic`, `Concise`, `Persuasive`) and Target Length (`Short`, `Medium`, `Detailed`).
+4. **🔍 Text & Document Analysis**: Receive structured critique including `Main Topic`, `Key Points`, `Important Observations`, `Strengths`, `Areas for Improvement`, and `Overall Assessment`.
+5. **💡 Intelligent Suggestions**: Turn raw context into actionable, prioritized recommendations categorized into `Immediate Action Items`, `Strategic Recommendations`, and `Follow-up Questions`.
 
 ---
 
