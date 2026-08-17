@@ -5,7 +5,6 @@ Encapsulates all Google Gemini API interactions, client management, and error ha
 Keeps API integration isolated from Streamlit UI code.
 """
 
-import os
 from typing import Optional
 from utils.helpers import get_api_key, validate_api_key
 from prompts.prompts import (

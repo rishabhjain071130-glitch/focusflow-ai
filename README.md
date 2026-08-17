@@ -2,22 +2,26 @@
 
 > **AI-Powered Productivity Assistant** — Built for the Innovation Hacks AI Internship 2026 (Week 1).
 
-FocusFlow AI is a professional, modular web application designed to help students, professionals, and general users analyze, summarize, create, and interact with text far more efficiently.
+FocusFlow AI is a professional, modular Streamlit web application designed to help students, professionals, and general users analyze, summarize, generate content, and interact with text far more efficiently using Google Gemini AI.
 
 ---
 
-## 📌 Problem Being Solved
+## 📌 Problem Statement
 
-In today's information-heavy environment, users waste significant time manually digesting long documents, drafting repetitive communications, analyzing document tone, or figuring out actionable next steps from raw meeting notes. 
+In today's fast-paced digital environment, users spend excessive time manually digesting long articles, drafting repetitive emails, analyzing document structure and tone, and extracting actionable next steps from raw meeting notes. Generic conversational chatbots often require tedious prompt setup and lack structured workflows tailored for daily productivity tasks.
 
-**FocusFlow AI** addresses this productivity bottleneck by offering a single, focused assistant exposed through five tailored capabilities rather than a generic chatbot interface.
+---
+
+## 💡 Solution
+
+**FocusFlow AI** provides a dedicated, structured productivity suite with five specialized AI capabilities. By isolating prompt engineering and embedding domain-specific guidance into a clean Streamlit interface, FocusFlow AI delivers immediate, high-quality, reproducible text transformations without manual prompt overhead.
 
 ---
 
 ## ✨ Core Capabilities (Week 1)
 
 1. **📝 Text Summarization**: Generate high-impact `Bullet Points`, a single tight `Concise Summary`, or a multi-paragraph `Executive Summary`.
-2. **❓ Question Answering (Ask AI)**: Get accurate, direct answers to general questions or ground answers using optional reference context. States limitations clearly when information is missing.
+2. **❓ Question Answering (Ask AI)**: Get accurate, direct answers to general questions or ground responses using optional reference context. States limitations clearly when context is insufficient.
 3. **✍️ Content Generation**: Draft `Email`, `Study Notes`, `Blog Outline`, `Social Media Post`, or `Professional Description` with customizable Tone (`Professional`, `Casual`, `Academic`, `Concise`, `Persuasive`) and Target Length (`Short`, `Medium`, `Detailed`).
 4. **🔍 Text & Document Analysis**: Receive structured critique including `Main Topic`, `Key Points`, `Important Observations`, `Strengths`, `Areas for Improvement`, and `Overall Assessment`.
 5. **💡 Intelligent Suggestions**: Turn raw context into actionable, prioritized recommendations categorized into `Immediate Action Items`, `Strategic Recommendations`, and `Follow-up Questions`.
@@ -26,22 +30,35 @@ In today's information-heavy environment, users waste significant time manually 
 
 ## 🛠️ Technology Stack
 
-- **Language**: Python 3.10+
-- **Frontend Framework**: [Streamlit](https://streamlit.io/)
-- **AI SDK**: Official [Google GenAI SDK](https://pypi.org/project/google-genai/) (`google-genai`) / Gemini API
+- **Core Language**: Python 3.10+
+- **Frontend Framework**: [Streamlit](https://streamlit.io/) (Vanilla CSS styling)
+- **AI SDK**: Official [Google GenAI SDK](https://pypi.org/project/google-genai/) (`google-genai`) / Gemini API (`gemini-2.5-flash`)
 - **Environment Management**: `python-dotenv`
 - **Version Control**: Git & GitHub
 
 ---
 
-## 📁 Project Architecture & Directory Structure
+## 🏛️ System Architecture
 
-FocusFlow AI follows a clean, modular architecture separating UI logic, AI service integration, and prompt engineering:
+FocusFlow AI follows a clean, decoupled 3-tier architecture separating user interface, AI client orchestration, prompt engineering templates, and environment utilities.
+
+```mermaid
+flowchart TD
+    User([User / Web Browser]) <--> UI[Streamlit Frontend App\napp.py]
+    UI <--> Helpers[Helper Utilities & Key Validation\nutils/helpers.py]
+    UI --> Prompts[Prompt Engineering Templates\nprompts/prompts.py]
+    UI <--> AIService[Gemini AI Service Layer\nservices/ai_service.py]
+    AIService <--> GeminiAPI[Google Gemini API\nGoogle GenAI SDK]
+```
+
+---
+
+## 📁 Directory Structure
 
 ```
 focusflow-ai/
 │
-├── app.py                  # Main Streamlit application UI & control flow
+├── app.py                  # Main Streamlit application UI & navigation
 ├── requirements.txt        # Application dependencies
 ├── .env.example            # Environment variables template
 ├── .gitignore              # Git ignore rules for secrets and build files
@@ -49,27 +66,27 @@ focusflow-ai/
 │
 ├── services/
 │   ├── __init__.py
-│   └── ai_service.py       # Gemini API client, API wrapper & error handling
+│   └── ai_service.py       # Gemini API client wrapper & error handling
 │
 ├── prompts/
 │   ├── __init__.py
-│   └── prompts.py          # Structured prompt templates for all 5 capabilities
+│   └── prompts.py          # Structured prompt templates & constants for all 5 modes
 │
 └── utils/
     ├── __init__.py
-    └── helpers.py          # Environment checks, validation & text helpers
+    └── helpers.py          # Environment configuration, API validation & text utilities
 ```
 
 ---
 
-## 🚀 Local Setup & Installation
+## 🚀 Setup & Installation
 
 ### 1. Prerequisites
-Ensure you have **Python 3.10 or higher** installed.
+Ensure **Python 3.10 or higher** is installed on your system.
 
-### 2. Clone Repository & Navigate
+### 2. Clone Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/rishabhjain071130-glitch/focusflow-ai.git
 cd focusflow-ai
 ```
 
@@ -91,24 +108,25 @@ pip install -r requirements.txt
 
 ---
 
-## 🔑 Environment Variable Setup & Security
+## 🔑 Environment Configuration
 
 1. Obtain a **Google Gemini API Key** from [Google AI Studio](https://aistudio.google.com/).
 2. Copy `.env.example` to create `.env`:
    ```bash
-   cp .env.example .env   # On Windows PowerShell: copy .env.example .env
+   # Windows PowerShell
+   copy .env.example .env
+
+   # Linux / macOS
+   cp .env.example .env
    ```
-3. Open `.env` and paste your API key:
+3. Open `.env` and set your API key:
    ```env
    GEMINI_API_KEY=your_actual_gemini_api_key_here
    ```
 
-> ⚠️ **SECURITY WARNING**: 
-> **NEVER commit your `.env` file or hardcode API keys anywhere in your codebase.** `.gitignore` is configured to exclude `.env` automatically. Always inspect `git status` before committing.
-
 ---
 
-## 💻 How to Run the Application
+## 💻 Usage & Running the App
 
 Start the Streamlit development server:
 
@@ -116,16 +134,32 @@ Start the Streamlit development server:
 streamlit run app.py
 ```
 
-The application will open automatically in your browser at `http://localhost:8501`.
+The application will launch automatically in your default browser at `http://localhost:8501`.
 
 ---
 
-## 📊 Current Development Status
+## 🛡️ Security & Secret Management
 
-- [x] **Week 1 (Current)**: Project foundation setup, modular architecture, Gemini API service layer, prompt template isolation, Streamlit UI, error handling, loading states, secure `.env` integration, documentation, and Git initialization.
-- [ ] **Week 2**: Advanced file uploading (PDF/TXT processing) & enhanced document analytics.
-- [ ] **Week 3**: Custom workflow templates & persistent history storage.
-- [ ] **Week 4**: Final performance optimization, testing suite, and production deployment.
+- **No Hardcoded Keys**: API keys are retrieved strictly via environment variables using `python-dotenv`.
+- **Git Protection**: `.gitignore` is explicitly configured to block `.env`, `.env.local`, and Streamlit secret files from ever being tracked.
+- **Verification**: Secret tracking is continuously verified using `git check-ignore` and `git ls-files`.
+
+---
+
+## ⚠️ Error Handling & Resiliency
+
+- **Input Validation**: Prevents blank submissions and prompts users with clear inline warnings.
+- **Graceful Failure**: All Gemini API errors (rate limits, quota limits, missing authentication) are intercepted in the service layer.
+- **Sanitized User Messages**: Technical stack traces and raw error outputs are mapped to clean, user-friendly status messages.
+
+---
+
+## 🔮 Future Improvements & Roadmap
+
+- [x] **Week 1 (Completed)**: Core 5 capabilities, Streamlit UI, Gemini API integration, prompt template isolation, clean service architecture, error handling, and security hardening.
+- [ ] **Week 2**: Document file uploads (`.pdf`, `.docx`, `.txt`) and automatic content extraction.
+- [ ] **Week 3**: Workflow templates and persistent user history storage.
+- [ ] **Week 4**: Advanced performance optimization, automated test suite, and cloud deployment.
 
 ---
 
