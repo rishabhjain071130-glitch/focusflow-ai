@@ -305,8 +305,20 @@ st.markdown(
         box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45) !important;
     }
 
-    /* Inputs, Selectboxes, Textareas Override */
-    .stTextArea textarea, .stTextInput input, div[data-baseweb="select"] > div {
+    /* Inputs, Selectboxes, Textareas Override with Adaptive Sizing */
+    .stTextArea textarea {
+        background-color: #0F172A !important;
+        border: 1px solid #334155 !important;
+        border-radius: 10px !important;
+        color: #F8FAFC !important;
+        field-sizing: content;
+        min-height: 100px !important;
+        max-height: 280px !important;
+        overflow-y: auto !important;
+        resize: vertical !important;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .stTextInput input, div[data-baseweb="select"] > div {
         background-color: #0F172A !important;
         border: 1px solid #334155 !important;
         border-radius: 10px !important;
@@ -480,7 +492,7 @@ if selected_mode == MODE_SUMMARIZE:
         st.markdown('<div class="card-label">1. Input Your Text</div>', unsafe_allow_html=True)
         text_input = st.text_area(
             "Input Text",
-            height=260,
+            height=110,
             placeholder="Paste your text here...",
             label_visibility="collapsed",
         )
@@ -553,7 +565,7 @@ elif selected_mode == MODE_ASK_AI:
     with st.expander("📌 Optional Reference Context", expanded=False):
         context_input = st.text_area(
             "Reference Context",
-            height=160,
+            height=110,
             placeholder="Paste background document, code snippet, or article snippet to ground the AI answer...",
         )
         st.markdown(
@@ -615,7 +627,7 @@ elif selected_mode == MODE_GENERATE_CONTENT:
     st.markdown('<div class="card-label" style="margin-top: 1rem;">Topic / Instructions</div>', unsafe_allow_html=True)
     instructions_input = st.text_area(
         "Instructions",
-        height=200,
+        height=110,
         placeholder="Describe the content topic, key points to cover, or specific guidance...",
         label_visibility="collapsed",
     )
@@ -652,7 +664,7 @@ elif selected_mode == MODE_ANALYZE_TEXT:
     st.markdown('<div class="card-label">Text to Analyze</div>', unsafe_allow_html=True)
     text_to_analyze = st.text_area(
         "Text to Analyze",
-        height=240,
+        height=110,
         placeholder="Paste draft, proposal, or document snippet to analyze...",
         label_visibility="collapsed",
     )
@@ -702,7 +714,7 @@ elif selected_mode == MODE_SMART_SUGGESTIONS:
     st.markdown('<div class="card-label">Situation / Content</div>', unsafe_allow_html=True)
     suggestion_input = st.text_area(
         "Situation / Content",
-        height=240,
+        height=110,
         placeholder="Paste meeting notes, project brief, or goal statement to generate recommendations...",
         label_visibility="collapsed",
     )
