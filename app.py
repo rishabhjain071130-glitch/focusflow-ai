@@ -51,8 +51,8 @@ st.markdown(
         height: 0px;
     }
     .block-container {
-        padding-top: 1.5rem !important;
-        padding-bottom: 2.5rem !important;
+        padding-top: 1.25rem !important;
+        padding-bottom: 2rem !important;
         max-width: 1280px;
     }
 
@@ -153,7 +153,7 @@ st.markdown(
     .main-subtitle {
         font-size: 0.98rem;
         color: #94A3B8;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
     }
 
     /* Glassmorphism Hero Card */
@@ -161,8 +161,8 @@ st.markdown(
         background: linear-gradient(135deg, rgba(30, 41, 59, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 16px;
-        padding: 1.75rem 2rem;
-        margin-bottom: 1.75rem;
+        padding: 1.5rem 1.75rem;
+        margin-bottom: 1.5rem;
         position: relative;
         overflow: hidden;
         backdrop-filter: blur(12px);
@@ -179,37 +179,37 @@ st.markdown(
         pointer-events: none;
     }
     .hero-welcome {
-        font-size: 1.4rem;
+        font-size: 1.35rem;
         font-weight: 700;
         color: #F8FAFC;
-        margin-bottom: 0.3rem;
+        margin-bottom: 0.25rem;
     }
     .hero-subtext {
-        font-size: 0.92rem;
+        font-size: 0.9rem;
         color: #94A3B8;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.25rem;
     }
 
     /* Metric Grid Cards inside Hero */
     .hero-stats-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        gap: 0.85rem;
     }
     .hero-stat-card {
         background: rgba(15, 23, 42, 0.6);
         border: 1px solid rgba(255, 255, 255, 0.08);
         border-radius: 12px;
-        padding: 0.9rem 1.1rem;
+        padding: 0.8rem 1rem;
     }
     .hero-stat-value {
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         font-weight: 700;
         color: #A78BFA;
-        margin-bottom: 0.15rem;
+        margin-bottom: 0.1rem;
     }
     .hero-stat-label {
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         color: #94A3B8;
         font-weight: 500;
     }
@@ -219,33 +219,33 @@ st.markdown(
         background: rgba(30, 41, 59, 0.65);
         border: 1px solid rgba(255, 255, 255, 0.09);
         border-radius: 14px;
-        padding: 1.25rem 1.5rem;
-        margin-bottom: 1.75rem;
+        padding: 1.1rem 1.4rem;
+        margin-bottom: 1.5rem;
         display: flex;
         align-items: center;
         backdrop-filter: blur(8px);
     }
     .tool-icon-circle {
-        width: 48px;
-        height: 48px;
+        width: 44px;
+        height: 44px;
         border-radius: 12px;
         background: linear-gradient(135deg, #7C3AED 0%, #3B82F6 100%);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.4rem;
-        margin-right: 1.25rem;
+        font-size: 1.3rem;
+        margin-right: 1.1rem;
         flex-shrink: 0;
         box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
     }
     .tool-header-title {
-        font-size: 1.25rem;
+        font-size: 1.2rem;
         font-weight: 700;
         color: #F8FAFC;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.15rem;
     }
     .tool-header-desc {
-        font-size: 0.88rem;
+        font-size: 0.86rem;
         color: #94A3B8;
     }
 
@@ -254,14 +254,7 @@ st.markdown(
         font-size: 0.95rem;
         font-weight: 600;
         color: #F8FAFC;
-        margin-bottom: 0.6rem;
-    }
-    .metric-badge-text {
-        font-size: 0.78rem;
-        color: #64748B;
-        text-align: right;
-        margin-top: -0.2rem;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.45rem;
     }
 
     /* Output Card styling */
@@ -269,22 +262,24 @@ st.markdown(
         background: rgba(30, 41, 59, 0.7);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 14px;
-        padding: 1.5rem 1.75rem;
-        margin-top: 1.5rem;
+        padding: 1.35rem 1.6rem;
+        margin-top: 1.25rem;
         backdrop-filter: blur(10px);
     }
     .output-card-title {
         font-size: 1.05rem;
         font-weight: 700;
         color: #F8FAFC;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.75rem;
         padding-bottom: 0.5rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
     .output-placeholder {
         color: #64748B;
-        font-style: italic;
         font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
 
     /* Primary Gradient Action Button */
@@ -329,16 +324,55 @@ st.markdown(
         box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) !important;
     }
 
-    /* Streamlit Radio styling for Sidebar */
+    /* Hide Streamlit Helper Captions and Shortcut Hints (Ctrl+Enter) */
+    .stTextArea [data-testid="stWidgetInstructions"],
+    .stTextArea small,
+    .stTextInput [data-testid="stWidgetInstructions"],
+    div[data-testid="stWidgetInstructions"] {
+        display: none !important;
+        visibility: hidden !important;
+        height: 0px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    /* Radio Options as Styled Selection Cards */
+    div[data-testid="stRadio"] > div[role="radiogroup"] {
+        gap: 0.5rem !important;
+    }
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label {
+        background: #0F172A !important;
+        border: 1px solid #334155 !important;
+        border-radius: 10px !important;
+        padding: 0.7rem 0.9rem !important;
+        margin-bottom: 0.3rem !important;
+        transition: all 0.18s ease-in-out !important;
+        cursor: pointer !important;
+    }
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label:hover {
+        border-color: #8B5CF6 !important;
+        background: rgba(139, 92, 246, 0.08) !important;
+    }
+    div[data-testid="stRadio"] > div[role="radiogroup"] > label[aria-checked="true"] {
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(59, 130, 246, 0.15) 100%) !important;
+        border: 1.5px solid #8B5CF6 !important;
+        box-shadow: 0 0 12px rgba(139, 92, 246, 0.25) !important;
+    }
+
+    /* Sidebar Navigation Hover */
     section[data-testid="stSidebar"] div[role="radiogroup"] > label {
-        background: transparent;
-        border-radius: 8px;
-        padding: 0.45rem 0.75rem;
-        margin-bottom: 0.25rem;
-        transition: all 0.15s ease;
+        background: transparent !important;
+        border: 1px solid transparent !important;
+        box-shadow: none !important;
+        padding: 0.45rem 0.75rem !important;
+        margin-bottom: 0.2rem !important;
     }
     section[data-testid="stSidebar"] div[role="radiogroup"] > label:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.05) !important;
+    }
+    section[data-testid="stSidebar"] div[role="radiogroup"] > label[aria-checked="true"] {
+        background: linear-gradient(135deg, rgba(124, 58, 237, 0.25) 0%, rgba(59, 130, 246, 0.2) 100%) !important;
+        border: 1px solid rgba(139, 92, 246, 0.4) !important;
     }
     </style>
     """,
@@ -351,8 +385,8 @@ st.markdown(
 NAV_MAP = {
     "▣ Summarize": MODE_SUMMARIZE,
     "💬 Ask AI": MODE_ASK_AI,
-    "✎ Generate Content": MODE_GENERATE_CONTENT,
-    "◈ Analyze Text": MODE_ANALYZE_TEXT,
+    "✎ Generate Content": MODE_ANALYZE_TEXT if False else MODE_GENERATE_CONTENT,
+    "◇ Analyze Text": MODE_ANALYZE_TEXT,
     "💡 Smart Suggestions": MODE_SMART_SUGGESTIONS,
 }
 
@@ -451,7 +485,7 @@ TOOL_HEADERS = {
         "Draft emails, study notes, blog outlines, social media posts, and descriptions tailored by tone and length.",
     ),
     MODE_ANALYZE_TEXT: (
-        "◈",
+        "◇",
         "Analyze Text",
         "Receive structured document critiques covering key points, strengths, improvements, and overall assessment.",
     ),
@@ -496,10 +530,6 @@ if selected_mode == MODE_SUMMARIZE:
             placeholder="Paste your text here...",
             label_visibility="collapsed",
         )
-        st.markdown(
-            f'<div class="metric-badge-text">Words: {count_words(text_input)} | Characters: {count_characters(text_input)}</div>',
-            unsafe_allow_html=True,
-        )
 
     with col_opt:
         st.markdown('<div class="card-label">2. Summary Style</div>', unsafe_allow_html=True)
@@ -515,10 +545,9 @@ if selected_mode == MODE_SUMMARIZE:
         )
 
         st.write("")
-        st.write("")
         btn_summarize = st.button("✨ Summarize", type="primary", use_container_width=True)
 
-    st.markdown('<div class="card-label" style="margin-top: 1.5rem;">3. Summary Output</div>', unsafe_allow_html=True)
+    st.markdown('<div class="card-label" style="margin-top: 1.25rem;">3. Summary Output</div>', unsafe_allow_html=True)
     output_container = st.container()
 
     if btn_summarize:
@@ -530,7 +559,7 @@ if selected_mode == MODE_SUMMARIZE:
                     result = ai_service.summarize(text=text_input, summary_style=summary_style)
                     with output_container:
                         st.markdown(
-                            f"""
+                            """
                             <div class="output-card-container">
                                 <div class="output-card-title">Summary Result</div>
                             </div>
@@ -545,7 +574,7 @@ if selected_mode == MODE_SUMMARIZE:
             st.markdown(
                 """
                 <div class="output-card-container">
-                    <div class="output-placeholder">Your summarized content will appear here...</div>
+                    <div class="output-placeholder">📄 Your summarized content will appear here...</div>
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -567,10 +596,6 @@ elif selected_mode == MODE_ASK_AI:
             "Reference Context",
             height=110,
             placeholder="Paste background document, code snippet, or article snippet to ground the AI answer...",
-        )
-        st.markdown(
-            f'<div class="metric-badge-text">Context Words: {count_words(context_input)}</div>',
-            unsafe_allow_html=True,
         )
 
     st.write("")
@@ -669,11 +694,6 @@ elif selected_mode == MODE_ANALYZE_TEXT:
         label_visibility="collapsed",
     )
 
-    st.markdown(
-        f'<div class="metric-badge-text">Words: {count_words(text_to_analyze)} | Characters: {count_characters(text_to_analyze)}</div>',
-        unsafe_allow_html=True,
-    )
-
     analysis_type = st.selectbox(
         "Analysis Focus",
         options=[
@@ -717,11 +737,6 @@ elif selected_mode == MODE_SMART_SUGGESTIONS:
         height=110,
         placeholder="Paste meeting notes, project brief, or goal statement to generate recommendations...",
         label_visibility="collapsed",
-    )
-
-    st.markdown(
-        f'<div class="metric-badge-text">Words: {count_words(suggestion_input)} | Characters: {count_characters(suggestion_input)}</div>',
-        unsafe_allow_html=True,
     )
 
     focus_area = st.selectbox(
