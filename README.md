@@ -1,8 +1,8 @@
 # FocusFlow AI ⚡
 
-> **AI-Powered Productivity Assistant** — Built for the Innovation Hacks AI Internship 2026 (Week 1).
+> **AI-Powered Productivity Assistant** — Built for the Innovation Hacks AI Internship 2026.
 
-FocusFlow AI is a professional, modular Streamlit web application designed to help students, professionals, and general users analyze, summarize, generate content, and interact with text far more efficiently using Google Gemini AI.
+FocusFlow AI is a professional, modular Streamlit web application designed to help students, professionals, and general users analyze, summarize, generate content, and interact with text far more efficiently using Google Gemini AI (`gemini-2.5-flash-lite`).
 
 ---
 
@@ -18,7 +18,7 @@ In today's fast-paced digital environment, users spend excessive time manually d
 
 ---
 
-## ✨ Core Capabilities (Week 1)
+## ✨ Core Capabilities
 
 1. **📝 Text Summarization**: Generate high-impact `Bullet Points`, a single tight `Concise Summary`, or a multi-paragraph `Executive Summary`.
 2. **❓ Question Answering (Ask AI)**: Get accurate, direct answers to general questions or ground responses using optional reference context. States limitations clearly when context is insufficient.
@@ -28,11 +28,20 @@ In today's fast-paced digital environment, users spend excessive time manually d
 
 ---
 
+## 🤖 Gemini AI Model
+
+- **Primary Model**: `gemini-2.5-flash-lite`
+- **SDK**: Official [`google-genai`](https://pypi.org/project/google-genai/) Python SDK with fallback support for `google-generativeai`.
+- **Optimization**: Configured with low latency and cost efficiency to maximize quota availability.
+- **Resiliency**: Built-in rate limit (429) interceptor with sanitized user messaging.
+
+---
+
 ## 🛠️ Technology Stack
 
 - **Core Language**: Python 3.10+
-- **Frontend Framework**: [Streamlit](https://streamlit.io/) (Vanilla CSS styling)
-- **AI SDK**: Official [Google GenAI SDK](https://pypi.org/project/google-genai/) (`google-genai`) / Gemini API (`gemini-2.5-flash-lite`)
+- **Frontend Framework**: [Streamlit](https://streamlit.io/) (Vanilla CSS modern dark theme)
+- **AI SDK**: Official [Google GenAI SDK](https://pypi.org/project/google-genai/) (`google-genai`)
 - **Environment Management**: `python-dotenv`
 - **Version Control**: Git & GitHub
 
@@ -48,7 +57,7 @@ flowchart TD
     UI <--> Helpers[Helper Utilities & Key Validation\nutils/helpers.py]
     UI --> Prompts[Prompt Engineering Templates\nprompts/prompts.py]
     UI <--> AIService[Gemini AI Service Layer\nservices/ai_service.py]
-    AIService <--> GeminiAPI[Google Gemini API\nGoogle GenAI SDK]
+    AIService <--> GeminiAPI[Google Gemini API\nGoogle GenAI SDK - gemini-2.5-flash-lite]
 ```
 
 ---
@@ -63,6 +72,10 @@ focusflow-ai/
 ├── .env.example            # Environment variables template
 ├── .gitignore              # Git ignore rules for secrets and build files
 ├── README.md               # Project documentation
+│
+├── docs/
+│   └── screenshots/        # Application screenshot assets & checklist
+│       └── README.md
 │
 ├── services/
 │   ├── __init__.py
@@ -126,7 +139,7 @@ pip install -r requirements.txt
 
 ---
 
-## 💻 Usage & Running the App
+## 💻 Usage & Running Locally
 
 Start the Streamlit development server:
 
@@ -138,28 +151,44 @@ The application will launch automatically in your default browser at `http://loc
 
 ---
 
+## 🌐 Deployment (Streamlit Community Cloud)
+
+FocusFlow AI is optimized for cloud deployment on **Streamlit Community Cloud**:
+
+1. Fork or push this repository to GitHub.
+2. Log into [Streamlit Community Cloud](https://streamlit.io/cloud).
+3. Click **New app** and select repository `focusflow-ai`, branch `main`, and main file `app.py`.
+4. Under **Advanced settings... -> Secrets**, configure your API key securely:
+   ```toml
+   GEMINI_API_KEY = "your_actual_gemini_api_key_here"
+   ```
+5. Click **Deploy**.
+
+---
+
+## 📷 Screenshots & Visual Checklist
+
+Screenshots and UI verification assets are organized in [`docs/screenshots/`](docs/screenshots/README.md).
+
+- **Landing Dashboard**: Glassmorphism dark mode with hero metrics grid.
+- **AI Connected Status**: Live connection status indicator in sidebar.
+- **Mode Workspaces**: 2-column layout for Summarize, Ask AI, Generate Content, Analyze Text, and Smart Suggestions.
+
+---
+
 ## 🛡️ Security & Secret Management
 
-- **No Hardcoded Keys**: API keys are retrieved strictly via environment variables using `python-dotenv`.
-- **Git Protection**: `.gitignore` is explicitly configured to block `.env`, `.env.local`, and Streamlit secret files from ever being tracked.
-- **Verification**: Secret tracking is continuously verified using `git check-ignore` and `git ls-files`.
+- **No Hardcoded Keys**: API keys are retrieved strictly via environment variables (`GEMINI_API_KEY`).
+- **Git Protection**: `.gitignore` is explicitly configured to block `.env`, `.env.local`, and secrets from ever being tracked.
+- **Verification**: Verified using `git check-ignore` and `git ls-files`.
 
 ---
 
 ## ⚠️ Error Handling & Resiliency
 
-- **Input Validation**: Prevents blank submissions and prompts users with clear inline warnings.
-- **Graceful Failure**: All Gemini API errors (rate limits, quota limits, missing authentication) are intercepted in the service layer.
-- **Sanitized User Messages**: Technical stack traces and raw error outputs are mapped to clean, user-friendly status messages.
-
----
-
-## 🔮 Future Improvements & Roadmap
-
-- [x] **Week 1 (Completed)**: Core 5 capabilities, Streamlit UI, Gemini API integration, prompt template isolation, clean service architecture, error handling, and security hardening.
-- [ ] **Week 2**: Document file uploads (`.pdf`, `.docx`, `.txt`) and automatic content extraction.
-- [ ] **Week 3**: Workflow templates and persistent user history storage.
-- [ ] **Week 4**: Advanced performance optimization, automated test suite, and cloud deployment.
+- **Input Validation**: Prevents blank submissions and prompts users with clear inline warnings (`Please enter some text before continuing.`).
+- **Graceful Failure**: Intercepts 429 rate limit and auth errors cleanly with sanitized messages (`AI usage limit reached. Please try again later.`).
+- **Zero Raw Exceptions**: Prevents stack traces, local paths, or internal variables from reaching the user interface.
 
 ---
 
