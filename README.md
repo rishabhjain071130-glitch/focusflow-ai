@@ -32,7 +32,7 @@ In today's fast-paced digital environment, users spend excessive time manually d
 
 - **Core Language**: Python 3.10+
 - **Frontend Framework**: [Streamlit](https://streamlit.io/) (Vanilla CSS styling)
-- **AI SDK**: Official [Google GenAI SDK](https://pypi.org/project/google-genai/) (`google-genai`) / Gemini API (`gemini-2.5-flash`)
+- **AI SDK**: Official [Google GenAI SDK](https://pypi.org/project/google-genai/) (`google-genai`) / Gemini API (`gemini-2.5-flash-lite`)
 - **Environment Management**: `python-dotenv`
 - **Version Control**: Git & GitHub
 

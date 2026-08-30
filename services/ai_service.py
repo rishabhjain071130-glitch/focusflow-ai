@@ -17,6 +17,10 @@ from prompts.prompts import (
 )
 
 
+# Module-level model configuration
+GEMINI_MODEL = "gemini-2.5-flash-lite"
+
+
 class AIServiceException(Exception):
     """Custom exception raised when an AI service call fails."""
     pass
@@ -31,7 +35,7 @@ class AIService:
         If api_key is omitted, loads key from environment via get_api_key().
         """
         self.api_key = api_key if api_key else get_api_key()
-        self.default_model = "gemini-2.5-flash"
+        self.default_model = GEMINI_MODEL
 
     def _get_client(self):
         """
@@ -39,7 +43,7 @@ class AIService:
         Supports official 'google-genai' SDK with fallback to 'google-generativeai'.
         """
         if not self.api_key:
-            raise AIServiceException("AI Service Unavailable. Please check system configuration.")
+            raise AIServiceException("AI service is currently unavailable.")
 
         # Primary attempt: Official Google GenAI SDK (`google-genai`)
         try:
@@ -93,27 +97,26 @@ class AIService:
                 return response.text if response.text else "No content returned from Gemini API."
 
             elif sdk_type == "legacy":
-                model_name = "gemini-1.5-flash"
                 model = client.GenerativeModel(
-                    model_name=model_name,
+                    model_name=self.default_model,
                     system_instruction=system_instruction
                 )
                 response = model.generate_content(prompt)
                 return response.text if response.text else "No content returned from Gemini API."
 
             else:
-                raise AIServiceException("Unsupported SDK configuration.")
+                raise AIServiceException("AI service is currently unavailable.")
 
         except AIServiceException:
             raise
         except Exception as e:
             err_str = str(e)
-            if "API_KEY_INVALID" in err_str or "API key not valid" in err_str:
-                raise AIServiceException("AI Service Unavailable. Authentication failed.")
+            if "API_KEY_INVALID" in err_str or "API key not valid" in err_str or "403" in err_str:
+                raise AIServiceException("AI service is currently unavailable.")
             elif "RESOURCE_EXHAUSTED" in err_str or "QUOTA_EXCEEDED" in err_str or "429" in err_str:
-                raise AIServiceException("AI Service rate limit or quota exceeded. Please try again shortly.")
+                raise AIServiceException("AI usage limit reached. Please try again later.")
             else:
-                raise AIServiceException("AI Service Error occurred. Please try again.")
+                raise AIServiceException("AI service is currently unavailable.")
 
     # Mode-specific Service Methods
     def summarize(self, text: str, summary_style: str = "Bullet Points") -> str:

@@ -27,72 +27,125 @@ st.set_page_config(
 )
 
 # -----------------------------------------------------------------------------
-# Custom Styling (Vanilla CSS for Premium Dark Mode Aesthetic)
+# Custom Styling (Modern Dark Productivity Interface)
 # -----------------------------------------------------------------------------
 st.markdown(
     """
     <style>
-    /* Gradient Header & Typography */
-    .main-header {
-        font-size: 2.4rem;
-        font-weight: 800;
-        background: linear-gradient(135deg, #6366F1 0%, #A855F7 50%, #EC4899 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 0.2rem;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    html, body, [class*="css"] {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
-    .sub-header {
-        font-size: 1.05rem;
-        color: #94A3B8;
-        margin-bottom: 1.8rem;
-    }
-    
-    /* Sidebar styling */
-    .sidebar-title {
-        font-size: 1.2rem;
+
+    /* Top Hero Header */
+    .hero-title {
+        font-size: 2.2rem;
         font-weight: 700;
         color: #F8FAFC;
-        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.2rem;
+    }
+    .hero-subtitle {
+        font-size: 1.0rem;
+        color: #94A3B8;
+        margin-bottom: 1.5rem;
+        font-weight: 400;
+    }
+
+    /* Selected Tool Header Banner */
+    .tool-banner {
+        background: #1E293B;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 1.25rem 1.5rem;
+        margin-bottom: 1.75rem;
+    }
+    .tool-banner-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #F8FAFC;
+        margin-bottom: 0.25rem;
+    }
+    .tool-banner-desc {
+        font-size: 0.9rem;
+        color: #94A3B8;
+    }
+
+    /* Sidebar Styling */
+    .sidebar-brand {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #F8FAFC;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.15rem;
+        text-transform: uppercase;
+    }
+    .sidebar-subbrand {
+        font-size: 0.82rem;
+        color: #94A3B8;
+        margin-bottom: 1rem;
     }
     .status-badge-ok {
-        background-color: rgba(34, 197, 94, 0.15);
+        background-color: rgba(34, 197, 94, 0.1);
         color: #4ADE80;
-        border: 1px solid rgba(34, 197, 94, 0.3);
-        padding: 0.4rem 0.8rem;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        display: inline-block;
+        border: 1px solid rgba(34, 197, 94, 0.25);
+        padding: 0.35rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
         margin-bottom: 1rem;
     }
     .status-badge-err {
-        background-color: rgba(239, 68, 68, 0.15);
+        background-color: rgba(239, 68, 68, 0.1);
         color: #F87171;
-        border: 1px solid rgba(239, 68, 68, 0.3);
-        padding: 0.4rem 0.8rem;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        display: inline-block;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+        padding: 0.35rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
         margin-bottom: 1rem;
     }
-
-    /* Output Card Container */
-    .output-card {
-        background: rgba(30, 41, 59, 0.7);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 1.5rem;
+    .nav-header {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #64748B;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
         margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    .sidebar-footer {
+        font-size: 0.78rem;
+        color: #64748B;
+        text-align: center;
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 1px solid #1E293B;
     }
 
-    /* Counter Badge */
-    .metric-badge {
-        font-size: 0.82rem;
+    /* Metric Counters */
+    .metric-text {
+        font-size: 0.8rem;
         color: #64748B;
         text-align: right;
-        margin-top: -0.8rem;
-        margin-bottom: 0.8rem;
+        margin-top: 0.3rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Output Section */
+    .output-header {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: #F8FAFC;
+        margin-top: 1.5rem;
+        margin-bottom: 0.75rem;
+        padding-bottom: 0.4rem;
+        border-bottom: 1px solid #334155;
     }
     </style>
     """,
@@ -103,31 +156,20 @@ st.markdown(
 # Sidebar Navigation & Status
 # -----------------------------------------------------------------------------
 with st.sidebar:
-    st.image("https://img.icons8.com/isometric/96/flash-on.png", width=64)
-    st.markdown('<div class="sidebar-title">FocusFlow AI</div>', unsafe_allow_html=True)
-    st.caption("AI-Powered Productivity Assistant")
+    st.markdown('<div class="sidebar-brand">FOCUSFLOW AI</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sidebar-subbrand">AI-powered productivity assistant</div>', unsafe_allow_html=True)
 
-    st.divider()
-
-    # AI Connection Status
+    # Status Indicator
     is_api_valid, _ = validate_api_key()
     if is_api_valid:
-        st.markdown(
-            '<div class="status-badge-ok">🟢 AI Connected</div>',
-            unsafe_allow_html=True,
-        )
+        st.markdown('<div class="status-badge-ok">● AI Connected</div>', unsafe_allow_html=True)
     else:
-        st.markdown(
-            '<div class="status-badge-err">🔴 AI Service Unavailable</div>',
-            unsafe_allow_html=True,
-        )
+        st.markdown('<div class="status-badge-err">● AI Service Unavailable</div>', unsafe_allow_html=True)
 
-    st.divider()
+    st.markdown('<div class="nav-header">PRODUCTIVITY TOOLS</div>', unsafe_allow_html=True)
 
-    # Capability Selection
-    st.subheader("Productivity Modes")
     selected_mode = st.radio(
-        "Choose Mode:",
+        "Select Tool",
         options=[
             MODE_SUMMARIZE,
             MODE_ASK_AI,
@@ -136,107 +178,117 @@ with st.sidebar:
             MODE_SMART_SUGGESTIONS,
         ],
         index=0,
-        help="Select an AI capability to optimize your workflow.",
+        label_visibility="collapsed",
     )
 
+    st.markdown('<div class="sidebar-footer">Powered by Gemini</div>', unsafe_allow_html=True)
 
 # -----------------------------------------------------------------------------
-# Main Application Content Area
+# Main Dashboard Header
 # -----------------------------------------------------------------------------
-st.markdown('<div class="main-header">FocusFlow AI</div>', unsafe_allow_html=True)
+st.markdown('<div class="hero-title">FocusFlow AI</div>', unsafe_allow_html=True)
 st.markdown(
-    '<div class="sub-header">Streamline your workflow with AI-powered summarization, Q&A, content creation, text analysis, and smart suggestions.</div>',
+    '<div class="hero-subtitle">Your intelligent workspace for understanding, creating, and improving content.</div>',
     unsafe_allow_html=True,
 )
 
-# Initialize AI Service Layer
+# Tool Descriptions for Header Banner
+TOOL_DESCRIPTIONS = {
+    MODE_SUMMARIZE: ("Summarize", "Extract bullet points, concise summaries, or executive overviews from articles, notes, and documents."),
+    MODE_ASK_AI: ("Ask AI", "Get direct answers to questions with optional document reference context for grounded responses."),
+    MODE_GENERATE_CONTENT: ("Generate Content", "Draft emails, study notes, blog outlines, social media posts, and descriptions tailored by tone and length."),
+    MODE_ANALYZE_TEXT: ("Analyze Text", "Receive structured document critiques covering key points, strengths, improvements, and overall assessment."),
+    MODE_SMART_SUGGESTIONS: ("Smart Suggestions", "Convert raw project notes or goals into actionable next steps, work breakdowns, and priority items."),
+}
+
+tool_title, tool_desc = TOOL_DESCRIPTIONS.get(selected_mode, (selected_mode, ""))
+
+st.markdown(
+    f"""
+    <div class="tool-banner">
+        <div class="tool-banner-title">{tool_title}</div>
+        <div class="tool-banner-desc">{tool_desc}</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Initialize Service Layer
 ai_service = AIService()
 
 # -----------------------------------------------------------------------------
 # MODE 1: SUMMARIZE
 # -----------------------------------------------------------------------------
 if selected_mode == MODE_SUMMARIZE:
-    st.header("📝 Text Summarization")
-    st.write("Extract bullet points, concise paragraphs, or executive summaries from lengthy documents.")
+    text_input = st.text_area(
+        "Input Text",
+        height=220,
+        placeholder="Paste article text, meeting notes, reports, or document content here...",
+    )
 
-    col1, col2 = st.columns([3, 1])
-    with col2:
-        summary_style = st.selectbox(
-            "Summary Style",
-            options=["Bullet Points", "Concise Summary", "Executive Summary"],
-            index=0,
-        )
+    st.markdown(
+        f'<div class="metric-text">Words: {count_words(text_input)} | Characters: {count_characters(text_input)}</div>',
+        unsafe_allow_html=True,
+    )
 
-    with col1:
-        text_input = st.text_area(
-            "Input Text to Summarize:",
-            height=250,
-            placeholder="Paste your article, meeting notes, report, or essay here...",
-        )
-        st.markdown(
-            f'<div class="metric-badge">Words: {count_words(text_input)} | Characters: {count_characters(text_input)}</div>',
-            unsafe_allow_html=True,
-        )
+    summary_style = st.selectbox(
+        "Summary Style",
+        options=["Bullet Points", "Concise Summary", "Executive Summary"],
+        index=0,
+    )
 
-    if st.button("✨ Summarize Text", type="primary", use_container_width=True):
+    st.write("")
+    if st.button("Summarize", type="primary", use_container_width=True):
         if not text_input.strip():
-            st.warning("Please provide input text to summarize.")
+            st.warning("Please enter some text before continuing.")
         else:
-            with st.spinner("Analyzing text and generating summary..."):
+            with st.spinner("Thinking..."):
                 try:
                     result = ai_service.summarize(text=text_input, summary_style=summary_style)
-                    st.success("Summary Generated!")
-                    st.markdown("### Summary Output")
+                    st.markdown('<div class="output-header">Summary Output</div>', unsafe_allow_html=True)
                     st.markdown(result)
                 except AIServiceException as e:
-                    st.error(f"Error: {e}")
+                    st.error(str(e))
 
 # -----------------------------------------------------------------------------
 # MODE 2: ASK AI
 # -----------------------------------------------------------------------------
 elif selected_mode == MODE_ASK_AI:
-    st.header("❓ Question Answering")
-    st.write("Ask general questions directly or provide reference context for grounded answers.")
-
     question_input = st.text_input(
-        "Your Question:",
-        placeholder="e.g., What are the key principles of responsive design?",
+        "Your Question",
+        placeholder="e.g., What are the core advantages of microservices architecture?",
     )
 
-    with st.expander("📌 Optional Reference Context (Paste document/code here)", expanded=False):
+    with st.expander("Optional Reference Context", expanded=False):
         context_input = st.text_area(
-            "Reference Context:",
-            height=180,
-            placeholder="Paste background text, document excerpt, or code snippet to ground the AI's answer...",
+            "Reference Document / Context",
+            height=160,
+            placeholder="Paste reference text, code snippet, or article to ground the AI answer...",
         )
         st.markdown(
-            f'<div class="metric-badge">Context Words: {count_words(context_input)}</div>',
+            f'<div class="metric-text">Context Words: {count_words(context_input)}</div>',
             unsafe_allow_html=True,
         )
 
-    if st.button("🚀 Ask AI", type="primary", use_container_width=True):
+    st.write("")
+    if st.button("Ask AI", type="primary", use_container_width=True):
         if not question_input.strip():
-            st.warning("Please enter a question.")
+            st.warning("Please enter some text before continuing.")
         else:
-            with st.spinner("Finding answer..."):
+            with st.spinner("Thinking..."):
                 try:
-                    result = ai_service.ask_ai(
-                        question=question_input, context=context_input
-                    )
-                    st.success("Answer Ready!")
-                    st.markdown("### Response")
+                    context_val = context_input if 'context_input' in locals() else None
+                    result = ai_service.ask_ai(question=question_input, context=context_val)
+                    st.markdown('<div class="output-header">AI Response</div>', unsafe_allow_html=True)
                     st.markdown(result)
                 except AIServiceException as e:
-                    st.error(f"Error: {e}")
+                    st.error(str(e))
 
 # -----------------------------------------------------------------------------
 # MODE 3: GENERATE CONTENT
 # -----------------------------------------------------------------------------
 elif selected_mode == MODE_GENERATE_CONTENT:
-    st.header("✍️ Content Generation")
-    st.write("Draft emails, study notes, blog outlines, social media posts, and descriptions.")
-
-    col1, col2, col3 = st.columns([1, 1, 1])
+    col1, col2, col3 = st.columns(3)
     with col1:
         content_type = st.selectbox(
             "Content Type",
@@ -263,16 +315,17 @@ elif selected_mode == MODE_GENERATE_CONTENT:
         )
 
     instructions_input = st.text_area(
-        "Topic / Instructions:",
-        height=200,
-        placeholder="e.g., Write a project update email to team leads summarizing milestones achieved and upcoming deadlines...",
+        "Topic / Instructions",
+        height=180,
+        placeholder="Describe the content topic, target audience, key points to cover...",
     )
 
-    if st.button("🎨 Generate Content", type="primary", use_container_width=True):
+    st.write("")
+    if st.button("Generate Content", type="primary", use_container_width=True):
         if not instructions_input.strip():
-            st.warning("Please enter topic or instructions for content generation.")
+            st.warning("Please enter some text before continuing.")
         else:
-            with st.spinner("Generating draft content..."):
+            with st.spinner("Generating your response..."):
                 try:
                     result = ai_service.generate_content(
                         instructions=instructions_input,
@@ -280,100 +333,89 @@ elif selected_mode == MODE_GENERATE_CONTENT:
                         tone=tone,
                         length=length,
                     )
-                    st.success("Draft Generated!")
-                    st.markdown("### Generated Content")
+                    st.markdown('<div class="output-header">Generated Content</div>', unsafe_allow_html=True)
                     st.markdown(result)
                 except AIServiceException as e:
-                    st.error(f"Error: {e}")
+                    st.error(str(e))
 
 # -----------------------------------------------------------------------------
 # MODE 4: ANALYZE TEXT
 # -----------------------------------------------------------------------------
 elif selected_mode == MODE_ANALYZE_TEXT:
-    st.header("🔍 Text & Document Analysis")
-    st.write("Receive structured critique including main topic, key points, observations, strengths, improvements, and assessment.")
+    text_to_analyze = st.text_area(
+        "Text to Analyze",
+        height=220,
+        placeholder="Paste document draft, proposal, email, or article snippet to analyze...",
+    )
 
-    col1, col2 = st.columns([3, 1])
-    with col2:
-        analysis_type = st.selectbox(
-            "Analysis Focus",
-            options=[
-                "Comprehensive Analysis",
-                "Tone & Sentiment",
-                "Readability & Clarity",
-                "Key Entities & Themes",
-            ],
-            index=0,
-        )
+    st.markdown(
+        f'<div class="metric-text">Words: {count_words(text_to_analyze)} | Characters: {count_characters(text_to_analyze)}</div>',
+        unsafe_allow_html=True,
+    )
 
-    with col1:
-        text_to_analyze = st.text_area(
-            "Text to Analyze:",
-            height=250,
-            placeholder="Paste your draft, proposal, or document snippet to analyze...",
-        )
-        st.markdown(
-            f'<div class="metric-badge">Words: {count_words(text_to_analyze)}</div>',
-            unsafe_allow_html=True,
-        )
+    analysis_type = st.selectbox(
+        "Analysis Focus",
+        options=[
+            "Comprehensive Analysis",
+            "Tone & Sentiment",
+            "Readability & Clarity",
+            "Key Entities & Themes",
+        ],
+        index=0,
+    )
 
-    if st.button("🔬 Analyze Text", type="primary", use_container_width=True):
+    st.write("")
+    if st.button("Analyze Text", type="primary", use_container_width=True):
         if not text_to_analyze.strip():
-            st.warning("Please provide text to analyze.")
+            st.warning("Please enter some text before continuing.")
         else:
-            with st.spinner("Analyzing text structure and tone..."):
+            with st.spinner("Thinking..."):
                 try:
                     result = ai_service.analyze_text(
                         text=text_to_analyze, analysis_type=analysis_type
                     )
-                    st.success("Analysis Complete!")
-                    st.markdown("### Structured Document Analysis")
+                    st.markdown('<div class="output-header">Structured Document Analysis</div>', unsafe_allow_html=True)
                     st.markdown(result)
                 except AIServiceException as e:
-                    st.error(f"Error: {e}")
+                    st.error(str(e))
 
 # -----------------------------------------------------------------------------
 # MODE 5: SMART SUGGESTIONS
 # -----------------------------------------------------------------------------
 elif selected_mode == MODE_SMART_SUGGESTIONS:
-    st.header("💡 Smart Productivity Suggestions")
-    st.write("Get actionable next steps, work breakdown structures, or priority recommendations.")
+    suggestion_input = st.text_area(
+        "Situation / Content",
+        height=220,
+        placeholder="Paste meeting notes, project status update, or task outline to generate recommendations...",
+    )
 
-    col1, col2 = st.columns([3, 1])
-    with col2:
-        focus_area = st.selectbox(
-            "Focus Area",
-            options=[
-                "Actionable Next Steps",
-                "Work Breakdown Structure",
-                "Follow-up Questions",
-                "Priority Recommendations",
-            ],
-            index=0,
-        )
+    st.markdown(
+        f'<div class="metric-text">Words: {count_words(suggestion_input)} | Characters: {count_characters(suggestion_input)}</div>',
+        unsafe_allow_html=True,
+    )
 
-    with col1:
-        suggestion_input = st.text_area(
-            "Project Context / Meeting Notes / Goal Statement:",
-            height=250,
-            placeholder="Paste raw meeting notes, project brief, or goal statement to generate structured next steps...",
-        )
-        st.markdown(
-            f'<div class="metric-badge">Words: {count_words(suggestion_input)}</div>',
-            unsafe_allow_html=True,
-        )
+    focus_area = st.selectbox(
+        "Focus Area",
+        options=[
+            "Actionable Next Steps",
+            "Work Breakdown Structure",
+            "Follow-up Questions",
+            "Priority Recommendations",
+        ],
+        index=0,
+    )
 
-    if st.button("⚡ Get Suggestions", type="primary", use_container_width=True):
+    st.write("")
+    if st.button("Get Smart Suggestions", type="primary", use_container_width=True):
         if not suggestion_input.strip():
-            st.warning("Please provide context or text to generate suggestions.")
+            st.warning("Please enter some text before continuing.")
         else:
-            with st.spinner("Formulating intelligent recommendations..."):
+            with st.spinner("Thinking..."):
                 try:
                     result = ai_service.suggest_improvements(
                         text=suggestion_input, focus_area=focus_area
                     )
-                    st.success("Suggestions Ready!")
-                    st.markdown("### Intelligent Recommendations")
+                    st.markdown('<div class="output-header">Actionable Recommendations</div>', unsafe_allow_html=True)
                     st.markdown(result)
                 except AIServiceException as e:
-                    st.error(f"Error: {e}")
+                    st.error(str(e))
