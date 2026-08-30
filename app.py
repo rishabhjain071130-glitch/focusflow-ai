@@ -385,7 +385,7 @@ st.markdown(
 NAV_MAP = {
     "▣ Summarize": MODE_SUMMARIZE,
     "💬 Ask AI": MODE_ASK_AI,
-    "✎ Generate Content": MODE_ANALYZE_TEXT if False else MODE_GENERATE_CONTENT,
+    "✎ Generate Content": MODE_GENERATE_CONTENT,
     "◇ Analyze Text": MODE_ANALYZE_TEXT,
     "💡 Smart Suggestions": MODE_SMART_SUGGESTIONS,
 }
